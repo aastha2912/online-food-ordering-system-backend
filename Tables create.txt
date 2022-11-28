@@ -1,0 +1,58 @@
+create table Customer( Cust_id number primary key, first_name varchar(20) not null, last_name varchar(20), email_id varchar (30) not null,phone_number_1 number(12) not null, password varchar(30) not null , street varchar(15) not null,city varchar(15) references Customer_address(city) not null); 
+
+create table Customer_address(city varchar(15) primary key, state varchar(15) not null);
+
+create table cust_add_phone(cust_id number references customer(cust_id)not null, phone_number_2 number(12));
+
+create table order_history (cust_id number references customer(cust_id)not null, order_time timestamp not null, order_date date not null, total_amount number not null,  order_status varchar(20));
+
+create table employee (employee_id number(15) primary key, first_name varchar(15) not null, last_name varchar(15), description varchar(100), rating number(5), hire_date date not null, dob date);
+
+create table rating (cust_id number references customer (cust_id) not null, employee_id number references employee(employee_id) not null, rating number(5) not null, reviews varchar(200));
+
+create table Payment(Reciept_no number(15) primary key,Cust_id number(15) references customer(cust_id),Order_id number(15) references order1(order_id),Pay_amount number(15) not null,Pay_Date date default sysdate);
+
+create table DebitCard(Receipt_no number(15) primary key,Card_no number(15) unique,CVV number(3) not null,Expiry_Date date not null);
+
+create table CreditCard(Receipt_no number(15) primary key,Card_no number(15) unique,CVV number(3) not null,Expiry_Date date not null);
+
+create table NetBanking(Receipt_no number(15) primary key,Bank varchar(30) not null,Username varchar(30) unique,Password varchar(30) not null);
+
+
+Create Table Restraunt1(
+Restraunt_id Number(15) Primary Key,
+Restraunt_name Varchar(20) NOT NULL,
+Rating Number(5),
+Street Varchar(15) References Restraunt2(Street));
+
+Create Table Restraunt2(
+Street Varchar(15) Primary Key,
+City Varchar(15) NOT NULL,
+State Varchar(15) NOT NULL);
+
+Create Table Order1(
+Order_id Number(15) primary key,
+Cust_id Number(15)  References Customer(Cust_id),
+Restraunt_id Number(15)References Restraunt1(Restraunt_id),
+Employee_id Number(15)  References Employee(Employee_id),
+Order_status Varchar(15),
+Order_date Date);
+
+Create Table Order_details(
+Order_id Number(15)  References Order1(Order_id),
+Item_id Number(15)  References Menu1(Item_id),
+Quantity Number NOT NULL,
+Unit_price Number(5) NOT NULL,
+Constraint order_pk Primary Key(Order_id,Item_id));
+
+Create Table Menu1(
+Item_id Number(15) Primary Key,
+Item_name Varchar(20) References Menu2(Item_name));
+
+Create Table Menu2(
+Item_name Varchar(20) Primary Key,
+Price Number(5) NOT NULL);
+
+
+
+

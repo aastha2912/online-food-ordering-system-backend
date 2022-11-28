@@ -1,0 +1,105 @@
+create or replace procedure cust_address (city in varchar, state in varchar)
+is
+begin
+insert into customer_address values(city, state);
+commit;
+end;
+/
+
+create procedure login (email in varchar, pass in varchar)
+declare
+cursor c is select email_id,password from customer where cust_id=1;
+user c%rowtype;
+begin
+open c;
+loop
+fetch c into user;
+exit when c%notfound;
+
+end loop;
+close c;
+end;
+/
+if c%notfound then
+dbms_output.put_line('Invalid Login Credentials');
+else
+dbms_output.put_line('Login Successful.');
+end if
+
+create or replace procedure rating12(custt_id in number, employee_id in number, rating in number, reviews in varchar, email in varchar)
+is
+begin
+
+insert into rating values(custt_id, employee_id, rating, reviews);
+commit;
+end;
+/
+
+create or replace procedure view_order(cid in number)
+is
+cursor c is select * from customer where cust_id=cid;
+cursor k is select * from order_details where cust_id=cid;
+begin
+open c;
+fetch c into u;
+if c%notfound then
+dbms_output.put_line('User does not exist!');
+else
+dbms_output.put_line('Customer_id: '||u.cust_id||' Name: '||u.first_name);
+open k;
+loop
+fetch k into p;
+exit when k%notfound;
+dbms_output.put_line('Order_id '||p.order_id||'Item_id: '||p.item_id||' Qty: '||p.quantity||' Unit_price: '||p.unit_price);
+end loop;
+close k;
+end if;
+close c;
+end;
+/
+
+create or replace procedure view_order(cid in number, oid in number)
+is
+cursor c is select cust_id,first_name from customer where cust_id=cid;
+cursor p is select restraunt_name from restaurant1 where restaurant_id=(select restraunt_id from order1 where cust_id = cid and order_id=oid);
+cursor i is select item_name from menu1 where item_id=(select item_id from order1 where cust_id = cid and order_id=oid);
+begin
+for rec in c loop
+dbms_output.put_line('Customer_id: '||rec.cust_id);
+dbms_output.put_line('Customer_name: '||rec.first_name);
+end loop;
+for rec2 in p loop
+dbms_output.put_line('Restaurnt_name: '||rec2.restraunt_name);
+end loop;
+for rec3 in i loop
+dbms_output.put_line('Item_name: '||rec3.item_name);
+end loop;
+end;
+/
+
+
+create or replace procedure cust_details(cid in number)
+is
+cursor c is select * from customer where cust_id=cid; 
+cursor o is select
+begin
+for rec in c loop
+dbms_output.put_line('Customer_id: '||rec.cust_id);
+dbms_output.put_line('Customer_name: '||rec.first_name|| rec.last_name);
+dbms_output.put_line('Address: '||rec.street||' '|| rec.city);
+dbms_output.put_line('Email: '||rec.email_id);
+end loop;
+end;
+/
+
+create or replace function calcPrice(i_price in number, qty in number) return number
+is
+tot number;
+begin
+tot:=i_price*qty;
+return(tot);
+end;
+/
+
+create or replace procedure place_order(cid in number)
+

@@ -1,0 +1,67 @@
+create or replace procedure menu(order_id in number)
+is 
+a number;
+qty number;
+prc number;
+ans varchar(15);
+begin
+loop
+begin
+dbms_output.put_line('Please select an item from the menu');
+select * from menu;
+item1:=&item_id;
+dbms_output.put_line('You have chosen');
+select * from menu where item_id=item1;
+dbms_output.put_line('Please select the quantity');
+qty:=&quantity;
+select price into prc from menu where item_id=item1;
+prc:=prc*qty;
+insert into order_details values(order_id,item1,qty,prc);
+dbms_output.put_line('Do You want to add more items?');
+ans:=&YES_OR_NO;
+if ans=='N' then
+exit;
+end if;
+end loop;
+loop
+begin
+dbms_output.put_line('Do You want to delete an item?');
+ans:=&Yes_Or_No;
+if ans=='N' then
+dbms_output.put_line('Proceeding towards payment');
+payment(order_id);
+exit;
+else if ans=='Y' then
+delete_it(order_id);
+end if;
+end loop;
+end;
+
+
+create or replace procedure delete_it(order_id in number)
+is
+ord number;
+begin
+dbms_output.put_line('Please enter the order_id that you want to delete');
+ord:=&order_id;
+delete from order_details where order_id=ord;
+end;
+
+
+create procedure place_order(cid in number, eid in number)
+is
+cursor c is select * from restaurant1;
+p reataurant1%rowtype
+begin
+dbms_output.put_line('Select Restaurant: ');
+open c;
+loop
+fetch c into p;
+exit when c%notfound;
+dbms_output.put_line(p.restaurant_id || p.restaurant_name);
+end loop;
+close c;
+end;
+/
+end;
+/

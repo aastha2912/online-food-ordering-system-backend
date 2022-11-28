@@ -1,0 +1,45 @@
+insert into restaurant1 values(1,'Chawlas',4.5,'Bhupindra Road');
+insert into restaurant1 values(2,'Cafe Yorker',4.2,'Bhupindra Road');
+insert into restaurant1 values(3,'Bhupindra Plaza',3.9,'Sirhind Road');
+insert into restaurant1 values(4,'Kokos Kitchen',4.1,'Leela Bhawan');
+insert into restaurant1 values(5,'HC Burger',3.7,'Leela Bhawan');
+
+insert into restaurant2 values('Bhupindra Road', 'Patiala', 'Punjab');
+insert into restaurant2 values('Sirhind Road', 'Patiala', 'Punjab');
+insert into restaurant2 values('Leela Bhawan', 'Patiala', 'Punjab');
+
+insert into menu2 values('Burger Combo',180);
+insert into menu2 values('Paneer Crispy Rollo',129);
+insert into menu2 values('Chicken Cheese Rollo',139);
+insert into menu2 values('Honey Chilli Potato',129);
+insert into menu2 values('Veggie Corn Salad',149);
+insert into menu2 values('Chicken Salad',169);
+insert into menu2 values('Chilli Paneer',179);
+insert into menu2 values('Mexican Rice Burrito',99);
+
+insert into menu1 values(1,'Burger Combo');
+insert into menu1 values(2,'Paneer Crispy Rollo');
+insert into menu1 values(3,'Chicken Cheese Rollo');
+insert into menu1 values(4,'Honey Chilli Potato');
+insert into menu1 values(5,'Veggie Corn Salad');
+insert into menu1 values(6,'Chicken Salad');
+insert into menu1 values(7,'Chilli Paneer');
+insert into menu1 values(8,'Mexican Rice Burrito');
+
+insert into employee values(1,'Rakesh','Singh',NULL,4.2,'25-APR-2019','29-MAY-1990');
+insert into employee values(2,'Rahul',NULL,NULL,4.1,'05-MAR-2018','09-OCT-1991');
+insert into employee values(3,'Sneha','Sharma',NULL,4.7,'17-JUN-2018','15-DEC-1990');
+insert into employee values(4,'Ankur',NULL,NULL,3.8,'15-JAN-2017','27-APR-1992');
+insert into employee values(5,'Rhea','Gerewal',NULL,4.2,'02-APR-2019','14-JAN-1993');
+
+insert into customer values(1,'abc','def','abc@gmail.com','abc','22 Baker Street','Patiala',7508118810);
+insert into customer_address values('Patiala', 'Punjab');
+
+insert into order1 values(1,1,1,1,'Delivered','05-MAY-2019');
+insert into order1 values(2,1,2,3,'Delivered','06-MAY-2019');
+
+insert into order_details values(1,2,1,129);
+insert into order_details values(2,4,1,129);
+
+
+
